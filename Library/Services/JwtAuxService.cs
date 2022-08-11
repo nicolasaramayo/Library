@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Library.Services
 {
-    internal class JwtAuxService : IJwtAuxValidator
+    public class JwtAuxService : IJwtAuxValidator
     {
         public JwtAuxService()
         {

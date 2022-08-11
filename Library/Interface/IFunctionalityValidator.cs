@@ -7,6 +7,6 @@ namespace Library.Interface
 {
     public interface IFunctionalityValidator
     {
-        Task ProcessInfo();
+        Task<string> ProcessInfo();
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using Library.Services;
 using Library.Interface;
 
 namespace Library.Middlewares
@@ -9,22 +8,22 @@ namespace Library.Middlewares
     public class FunctionalityMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IFunctionalityValidator _functionalityService;
+        //private readonly IFunctionalityValidator _functionalityService;
 
-        public  FunctionalityMiddleware(IFunctionalityValidator functionalityService)
-        {
-            _functionalityService = functionalityService;
-        }
+        //public  FunctionalityMiddleware(IFunctionalityValidator functionalityService)
+        //{
+        //    _functionalityService = functionalityService;
+        //}
 
         public FunctionalityMiddleware(RequestDelegate next)
         {
             _next = next;
         }
 
-        public Task Invoke(HttpContext httpContext)
+        public Task Invoke(HttpContext httpContext, IFunctionalityValidator functionalityService)
         {
             //llamar al servicio. llamar al arbol mock
-            Task task = _functionalityService.ProcessInfo();
+            var task = functionalityService.ProcessInfo();
             return _next(httpContext);
 
         }
@@ -32,7 +31,7 @@ namespace Library.Middlewares
 
     public static class FuncionalityMiddlewareExtensions
     {
-        public static IApplicationBuilder UseMiddleware(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseFunctionality(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<FunctionalityMiddleware>();
         }

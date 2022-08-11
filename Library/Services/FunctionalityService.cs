@@ -21,12 +21,12 @@ namespace Library.Services
         {
             _httpClientFactory = httpClientFactory;
         }
-        public void Test()
-        {
-            //todo
-            Task task = ProcessInfo();
-        }
-        public async Task ProcessInfo()
+        //public void Test()
+        //{
+        //    //todo
+        //    Task task = ProcessInfo();
+        //}
+        public async Task<string> ProcessInfo()
         {
             // Asyncronously wait to enter the SemaphoreSlim
             await _semaphoreslim.WaitAsync();
@@ -34,12 +34,18 @@ namespace Library.Services
             try
             {
                 var cliente = _httpClientFactory.CreateClient();
-                using var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "localhost:8080/mock/get");
+                using var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "http://localhost:8080/mock/get");
                 var response = await cliente.SendAsync(httpRequestMessage);
                 var contenido = await response.Content.ReadAsStringAsync();
-                //aplicar aca httpcontext??                 
+                //aplicar aca httpcontext??
+                return contenido;
             }
-            finally 
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return "";
+            }
+            finally
             {
                 _semaphoreslim.Release();
             }            
