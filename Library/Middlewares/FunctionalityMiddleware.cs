@@ -21,11 +21,11 @@ namespace Library.Middlewares
             _next = next;
         }
 
-        public Task<Task> Invoke(HttpContext httpContext)
+        public Task Invoke(HttpContext httpContext)
         {
             //llamar al servicio. llamar al arbol mock
-            var task = _functionalityService.ProcessInfo();
-            return Task.FromResult(_next(httpContext));
+            Task task = _functionalityService.ProcessInfo();
+            return _next(httpContext);
 
         }
     }
