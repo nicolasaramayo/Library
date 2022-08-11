@@ -23,9 +23,8 @@ namespace Library.Middlewares
 
         public Task<Task> Invoke(HttpContext httpContext)
         {
-            //llamar al servicio. // calltomock
-            FunctionalityService funcionalityService = (FunctionalityService)_functionalityService;
-            var task = funcionalityService.ProcessInfo();
+            //llamar al servicio. llamar al arbol mock
+            var task = _functionalityService.ProcessInfo();
             return Task.FromResult(_next(httpContext));
 
         }
