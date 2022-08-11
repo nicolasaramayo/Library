@@ -14,18 +14,19 @@ namespace Library.Middlewares
         private readonly IConfiguration _configuration;
         private readonly IJwtAuxValidator _jwtAuxValidator;
 
-        public JwtAuxMiddleware(RequestDelegate next, IConfiguration configuration)
+        public JwtAuxMiddleware(RequestDelegate next, IConfiguration configuration, IJwtAuxValidator jwtAuxValidator)
         {
             _next = next;
             _configuration = configuration; 
+            _jwtAuxValidator = jwtAuxValidator;
         }
 
-        public async Task Invoke(HttpContext httpContext)
+        public Task Invoke(HttpContext httpContext)
         {
             var token = httpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                async _jwtAuxValidator.validarToken(_configuration, token);
+                 _jwtAuxValidator.ValidarToken(_configuration, token);
              
             return _next(httpContext);
         }

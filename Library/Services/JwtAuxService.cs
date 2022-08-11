@@ -13,7 +13,11 @@ namespace Library.Services
 {
     internal class JwtAuxService : IJwtAuxValidator
     {
-        public static void ValidarToken(IConfiguration configuration, string token)
+        public JwtAuxService()
+        {
+        }
+
+        public void ValidarToken(IConfiguration configuration, string token)
         {
             try
             {

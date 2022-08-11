@@ -9,24 +9,25 @@ namespace Library.Middlewares
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly AppSettings _appSettings;
+        //private readonly AppSettings _appSettings;
 
-        public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
+        public JwtMiddleware(RequestDelegate next)
         {
             _next = next;
-            _appSettings = appSettings.Value;
+            
         }
 
         public async Task Invoke(HttpContext context)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
-            if (token != null)
-                await attachAccountToContext(context, dataContext, token);
+            //if (token != null)
+            //    await attachAccountToContext(context, token);
 
             await _next(context);
         }
 
+        /*
         private async Task attachAccountToContext(HttpContext context, string token)
         {
             try
@@ -54,6 +55,6 @@ namespace Library.Middlewares
                 // do nothing if jwt validation fails
                 // account is not attached to context so request won't have access to secure routes
             }
-        }
+        }*/
     }
 }
