@@ -6,10 +6,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Web;
+using Library.Interface;
 
 namespace Library.Services
 {
-    public class FunctionalityService
+    public class FunctionalityService : IFunctionalityValidator
     {
         public readonly IHttpClientFactory _httpClientFactory;
         public HttpContext _httpcontext;
