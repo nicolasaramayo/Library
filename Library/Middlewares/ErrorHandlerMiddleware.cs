@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 
 namespace Library.Middlewares
 {
-    internal class ErrorHandlerMiddleware
+    //TODO: Debe ser capas de atrapar cualquier error que surga desde nuestro aplicacion.
+
+    public class ErrorHandlerMiddleware
     {
         private readonly RequestDelegate _next;
 

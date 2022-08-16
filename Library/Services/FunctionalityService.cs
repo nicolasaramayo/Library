@@ -21,11 +21,7 @@ namespace Library.Services
         {
             _httpClientFactory = httpClientFactory;
         }
-        //public void Test()
-        //{
-        //    //todo
-        //    Task task = ProcessInfo();
-        //}
+        
         public async Task<string> ProcessInfo()
         {
             // Asyncronously wait to enter the SemaphoreSlim
@@ -42,7 +38,10 @@ namespace Library.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("**************************************");
+                Console.WriteLine("Test Console: ");
+                Console.WriteLine("" + e);
+                Console.WriteLine("**************************************");
                 return "";
             }
             finally

@@ -6,5 +6,7 @@ namespace Library.Interface
 {
     public interface IAvailabilityValidator
     {
+        //interface llame al servicio. 
+
     }
 }

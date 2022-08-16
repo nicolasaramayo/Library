@@ -24,6 +24,9 @@ namespace Library.Middlewares
         {
             //llamar al servicio. llamar al arbol mock
             var task = functionalityService.ProcessInfo();
+            // la informacion resulta debe alojarse en cache para evitar multiples llamados. 
+            // la cache debe actualizarse cada 10 minutos. 
+            // averiguar como funciona IMemoryCache. 
             return _next(httpContext);
 
         }
